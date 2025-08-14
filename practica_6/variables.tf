@@ -28,3 +28,8 @@ variable "sg_ingress_cidr" {
   description = "CIDR for ingress traffic"
   type = string
 }
+
+variable "ec2_specs" {
+  description = "Parametros de la instancia"
+  type = map(string)
+}
