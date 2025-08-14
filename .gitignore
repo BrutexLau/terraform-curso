@@ -5,6 +5,7 @@
 .terraform/
 .terraform.lock.hcl
 *.tfvars
+*.pem
 
 # IDEs
 .vscode/
