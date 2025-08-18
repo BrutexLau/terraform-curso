@@ -13,7 +13,7 @@ resource "aws_instance" "public_instance" {
   vpc_security_group_ids = [aws_security_group.sg_public_instance.id]
   user_data              = file("scripts/userdata.sh")
   tags = {
-    Name = each.value
+    Name = "${each.value}-${local.sufix}"
   }
 
   # lifecycle {
@@ -38,6 +38,6 @@ resource "aws_instance" "moniroting_instance" {
   vpc_security_group_ids = [aws_security_group.sg_public_instance.id]
   user_data              = file("scripts/userdata.sh")
   tags = {
-    Name = "Monitoreo"
+    Name = "Monitoreo-${local.sufix}"
   }
 }

@@ -1,7 +1,7 @@
 resource "aws_vpc" "vpc_virginia" {
   cidr_block = var.virginia_cidr
   tags = {
-    "Name" = "vpc_virginia"
+    "Name" = "vpc_virginia-${local.sufix}"
   }
 }
 
@@ -32,7 +32,7 @@ resource "aws_subnet" "public_subnet" {
   availability_zone       = "us-east-1a" # 👈 fuerza una AZ donde sí existe t3.micro
   map_public_ip_on_launch = true
   tags = {
-    "Name" = "Public_Subnet"
+    "Name" = "Public_Subnet-${local.sufix}"
   }
 }
 
@@ -41,7 +41,7 @@ resource "aws_subnet" "private_subnet" {
   cidr_block        = var.subnets[1]
   availability_zone = "us-east-1a" # 👈 misma AZ
   tags = {
-    "Name" = "Private_Subnet"
+    "Name" = "Private_Subnet-${local.sufix}"
   }
 }
 // Para poder llegar desde internet a nuestas instancias EC2
@@ -49,7 +49,7 @@ resource "aws_internet_gateway" "igw" {
   vpc_id = aws_vpc.vpc_virginia.id
 
   tags = {
-    Name = "igw vpc virginia"
+    Name = "igw vpc virginia-${local.sufix}"
   }
 }
 
@@ -62,7 +62,7 @@ resource "aws_route_table" "public_crt" {
   }
 
   tags = {
-    Name = "publi crt"
+    Name = "publi crt-${local.sufix}"
   }
 }
 
@@ -77,7 +77,7 @@ resource "aws_security_group" "sg_public_instance" {
   vpc_id      = aws_vpc.vpc_virginia.id
 
   tags = {
-    Name = "Public Instance SG"
+    Name = "Public Instance SG-${local.sufix}"
   }
 }
 
